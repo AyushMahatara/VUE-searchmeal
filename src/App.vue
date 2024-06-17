@@ -1,5 +1,6 @@
 <template>
-  <h1 class="bg-red-500">hello</h1>
+  <router-link to="/">Go to Home</router-link>
+  <router-view></router-view>
 </template>
 
 <script setup></script>

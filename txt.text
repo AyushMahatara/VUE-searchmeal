@@ -1,0 +1,1 @@
+to change the port go to package and add this "dev": "vite --port=3000",
