@@ -1,17 +1,18 @@
 <template>
-  <h1>Meal By Letter</h1>
+  <div class="p-8">
+    <h1 class="text-4xl font-bold mb-5">Meals By Letter</h1>
+    <div class="mt-8">
+      <router-link
+        :to="{ name: 'byLetter', params: { letter } }"
+        v-for="letter of letters"
+        :key="letter"
+        class="p-2 border-2 border-gray-400"
+      >
+        {{ letter }}
+      </router-link>
 
-  <div class="mt-4">
-    <router-link
-      :to="{ name: 'byLetter', params: { letter } }"
-      v-for="letter of letters"
-      :key="letter"
-      class="p-2 border-2 border-gray-400"
-    >
-      {{ letter }}
-    </router-link>
-
-    <Meals :meals="meals" />
+      <Meals :meals="meals" />
+    </div>
   </div>
 </template>
 
@@ -23,13 +24,21 @@ import { useRoute } from "vue-router";
 import Meals from "../components/Meals.vue";
 
 const route = useRoute();
-const letters = "ABCCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const meals = computed(() => store.state.mealsByLetter);
 
-watch(route, () => {
-  store.dispatch("searchMealsByLetter", route.params.letter);
-});
 onMounted(() => {
-  store.dispatch("searchMealsByLetter", route.params.letter);
+  if (route.params.letter) {
+    store.dispatch("searchMealsByLetter", route.params.letter);
+  }
 });
+
+watch(
+  () => route.params.letter,
+  (newLetter) => {
+    if (newLetter) {
+      store.dispatch("searchMealsByLetter", newLetter);
+    }
+  }
+);
 </script>

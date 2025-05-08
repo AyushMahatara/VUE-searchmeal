@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow rounded-xl">
+  <div class="bg-white shadow rounded-xl hover:scale-105 transition-all">
     <router-link :to="{ name: 'mealDetails', params: { id: meal.idMeal } }">
       <img
         :src="meal.strMealThumb"
@@ -9,9 +9,8 @@
     </router-link>
     <div class="px-3">
       <h3 class="p-3 font-semibold">{{ meal.strMeal }}</h3>
-      <div class="p-3">
-        <YouTubeButton :href="meal.strYoutube" />
-        <router-link to="/">View</router-link>
+      <div class="p-3 pb-5">
+        <YouTubeButton :href="meal.strYoutube">YouTube</YouTubeButton>
       </div>
     </div>
   </div>
